@@ -62,8 +62,6 @@ Start the Time Agent application with Gradio interface:
 uv run app.py
 ```
 
-> **Note**: You may see a warning about "App name mismatch detected" - this can be safely ignored.
-
 ### Option 2: Run with ADK Web
 
 From the root directory, run with ADK web:
