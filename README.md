@@ -35,30 +35,22 @@
 3. **Get your API key** (free) from [Google AI Studio](https://aistudio.google.com/api-keys)
 
 
-4. **Configure your API key**
+4. **Configure Environment**
 
-   Rename the `.env.example` file to `.env` in the project root, and add your Google API key:
+   Go to folder bi_agent and rename `.example.env` to `.env` and fill in your credentials:
 
    ```bash
-   GOOGLE_API_KEY=YourApiKeyHere
+   # Google API Key
+   GOOGLE_API_KEY=your_gemini_api_key_here
+   
+   # SQL Server Configuration
+   MSSQL_SERVER=your_server_address
+   MSSQL_DATABASE=your_database_name
+   MSSQL_USERNAME=your_username
+   MSSQL_PASSWORD=your_password
    ```
 
 **Important**: The `.env` file is already listed in `.gitignore` and will **not** be committed to the repository, keeping your key private.
-
-5. **Configure Environment**
-
-Go to folder bi_agent and rename `.example.env` to `.env` and fill in your credentials:
-
-```env
-# Google API Key
-GOOGLE_API_KEY=your_gemini_api_key_here
-
-# SQL Server Configuration
-MSSQL_SERVER=your_server_address
-MSSQL_DATABASE=your_database_name
-MSSQL_USERNAME=your_username
-MSSQL_PASSWORD=your_password
-```
 
 ## Running the Application
 
