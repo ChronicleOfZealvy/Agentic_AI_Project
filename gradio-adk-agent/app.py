@@ -212,7 +212,22 @@ def clear_all():
 # UI
 # =============================================================================
 
-with gr.Blocks(fill_width=True) as demo:
+custom_css = """
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
+.gradio-container { background: radial-gradient(circle at top right, #1e293b, #0f172a, #020617) !important; font-family: 'Inter', sans-serif !important; }
+h1 { background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc) !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; font-weight: 800 !important; text-align: center !important; font-size: 2.8rem !important;}
+.gradio-container label span { background-color: #6366f1 !important; color: white !important; font-weight: 600 !important; padding: 2px 8px !important; border-radius: 4px !important; }
+.gradio-container :is(textarea, input), button.secondary, .gr-button:not(.btn-primary) { 
+    background-color: #2d3748 !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; color: white !important; 
+}
+button.secondary:hover, .gr-button:not(.btn-primary):hover { background-color: #6366f1 !important; border-color: #818cf8 !important; }
+.btn-primary { background: #6366f1 !important; border: none !important; color: white !important; }
+.gradio-container :is(.gr-form, .gr-box, .gr-padded, .gr-block, .form, .gr-accordion):not(.vega-actions-wrapper) { 
+    border: none !important; box-shadow: none !important; background-color: transparent !important; 
+}
+"""
+
+with gr.Blocks(fill_width=True, css=custom_css) as demo:
 
     gr.Markdown("# 🤖 Intelligent SQL Agent & Analytics")
 
