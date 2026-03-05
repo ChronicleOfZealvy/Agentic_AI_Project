@@ -48,26 +48,28 @@ The system follows a **sequential agent pipeline**, where each agent is responsi
 ## Project Structure
 
 ```
-gradio-adk-agent/
-├── bi_agent/
-│   ├── __init__.py
-│   ├── agent.py           # Agent definitions and prompts
-│   ├── tools.py           # Tool functions used by agents
-│   ├── bi_service.py      # Business Intelligence service layer
-│   ├── db_config.py       # Database configuration
-│   ├── sql_executor.py    # SQL validation and execution
-│   └── .env.example       # Environment variable template
-│
-├── assets/                # Architecture diagrams
+.
+├── assets/                        # Architecture diagrams
 │   ├── Workflow.png
 │   └── root_agent.png
 │
-├── app.py                 # Gradio web interface
-├── AGENTS.md              # Prompt templates
-├── Short Technical Report.md
-├── pyproject.toml         # Project dependencies
-├── uv.lock                # Reproducible environment
-└── README.md
+├── gradio-adk-agent/              # Main project directory
+│   ├── bi_agent/
+│   │   ├── __init__.py
+│   │   ├── agent.py               # Agent definitions and prompts
+│   │   ├── tools.py               # Tool functions used by agents
+│   │   ├── bi_service.py          # Business Intelligence service layer
+│   │   ├── db_config.py           # Database configuration
+│   │   ├── sql_executor.py        # SQL validation and execution
+│   │   └── .env.example
+│   │
+│   ├── app.py                     # Gradio web interface
+│   ├── AGENTS.md                  # Prompt templates
+│   ├── pyproject.toml             # Project dependencies
+│   └── uv.lock                    # Reproducible environment
+│
+├── README.md
+└── Short Technical Report.md
 ```
 
 ---
