@@ -1,4 +1,4 @@
-# Agentic AI for Business Intelligence  
+# Agentic AI for Business Intelligence
 ### Short Technical Report
 
 ---
@@ -6,53 +6,68 @@
 ## 1. System Architecture
 
 <p align="center">
-  <img src="assets/root_agent.png" width="820"/>
+  <img src="assets/Workflow.png" width="820"/>
 </p>
 
 <p align="center">
-  <em>Figure 1. Unified Agentic Architecture</em>
+  <em>Figure 1. Overall Agentic BI Workflow</em>
 </p>
 
-The proposed system adopts a **Unified Agentic Architecture** designed to integrate reasoning, validation, and controlled tool invocation within a single coordinated execution loop.
+The proposed system adopts a **Unified Agentic Architecture** designed to integrate reasoning, validation, and controlled tool invocation within a coordinated execution loop.
 
-The architecture consists of three primary components:
+The execution flow begins when a user submits a business question. The **Root Agent** receives the request and delegates the task to the **BI Unified Agent**. The BI agent retrieves database schema information and generates SQL queries through controlled tools.
+
+After successful SQL execution, the resulting structured data is forwarded to the **Insight Agent**, which generates visualizations and analytical explanations before returning the results to the user interface.
+
+The architecture consists of three primary components.
+
+---
+
+## 2. Agent Coordination Design
 
 ### 🔹 Root Agent (Orchestrator)
-Responsible for managing execution flow and delegating tasks to specialized sub-agents.
+
+<p align="center">
+  <img src="assets/root_agent.png" width="700"/>
+</p>
+
+<p align="center">
+  <em>Figure 2. Root Agent Sequential Coordination</em>
+</p>
+
+The **Root Agent** acts as the system orchestrator. It manages the execution flow and coordinates interactions between sub-agents and system tools.
 
 ### 🔹 BI Unified Agent
-Performs:
+
+The **BI Unified Agent** performs several core analytical tasks:
+
 - Business intent analysis  
 - Schema grounding  
 - SQL generation  
 
-These steps are executed within a consolidated reasoning loop to minimize latency and token redundancy.
+These steps are executed within a unified reasoning loop to reduce latency and unnecessary token consumption.
 
-The agent interacts exclusively through controlled tools:
+The agent interacts with the database only through controlled tools:
+
 - `get_database_schema`
 - `execute_sql_and_format`
 
 ### 🔹 Insight Agent
-Receives structured query results and performs:
+
+The **Insight Agent** receives structured query results and performs:
+
 - Automatic visualization selection  
 - Plain-language analytical explanation  
 
-An **intelligent error-handling loop** captures SQL execution errors and iteratively refines queries until successful execution is achieved.
-
-Compared to a traditional multi-step pipeline, this architecture improves:
-
-- SQL reliability  
-- Response latency  
-- API cost efficiency  
-- Overall system stability  
+This component translates raw analytical results into business-friendly insights that can be easily interpreted by non-technical users.
 
 ---
 
-## 2. Prompting Strategy
+## 3. Prompting Strategy
 
 The system applies structured, schema-aware prompting to enhance semantic accuracy and reduce hallucination.
 
-### 2.1 SQL Generation Prompt
+### 3.1 SQL Generation Prompt
 
 The SQL agent is guided by:
 
@@ -60,99 +75,98 @@ The SQL agent is guided by:
 - Contextual schema injection  
 - Strict enforcement of **SELECT-only** query generation  
 - Structured reasoning steps:
-  - Entity identification  
-  - Join determination  
-  - Filtering logic  
-  - Aggregation logic  
+  - Entity identification
+  - Join determination
+  - Filtering logic
+  - Aggregation logic
 
 This structured reasoning design significantly reduces incorrect joins, hallucinated tables, and semantic misalignment.
 
-### 2.2 Visualization & Insight Prompt
+### 3.2 Visualization & Insight Prompt
 
 The Insight Agent prompt instructs the model to:
 
 - Analyze dataset structure and dimensionality  
-- Select appropriate chart types  
-  - Line chart → Time-series  
-  - Bar chart → Categorical comparison  
-- Generate concise, business-oriented explanations  
+- Select appropriate chart types
+  - Line chart → Time-series analysis
+  - Bar chart → Categorical comparison
+- Generate concise, business-oriented explanations
 
 This design improves interpretability and supports non-technical decision-makers.
 
 ---
 
-## 3. Safety Measures
+## 4. Safety Measures
 
 To mitigate prompt injection risks and ensure secure enterprise deployment, multiple guardrails were implemented.
 
 ### 🔐 SQL Execution Restrictions
-- Only **SELECT** statements are permitted.  
-- Destructive operations (DROP, DELETE, UPDATE, INSERT, ALTER) are explicitly blocked.  
+
+- Only **SELECT** statements are permitted.
+- Destructive operations (DROP, DELETE, UPDATE, INSERT, ALTER) are strictly blocked.
 - SQL structure is validated prior to execution.
 
 ### 🔐 Tool-Based Access Control
+
 The LLM does not directly access the database.  
 All database interactions occur exclusively through predefined tools:
 
 - `get_database_schema`
 - `execute_sql_and_format`
 
-This controlled interface prevents arbitrary command execution and enforces strict boundaries.
-
 ### 🔐 Schema-Grounded Context Injection
-Only relevant schema metadata is dynamically retrieved, which:
-- Reduces hallucination risk  
-- Limits information exposure  
-- Improves semantic precision  
+
+Only relevant schema metadata is dynamically retrieved. This approach:
+
+- Reduces hallucination risk
+- Limits unnecessary information exposure
+- Improves semantic precision
 
 ### 🔐 Error Feedback Loop
-If execution fails:
-1. The database error message is captured  
-2. The error is fed back to the agent  
-3. A refined SQL query is regenerated  
 
-This iterative correction mechanism enhances robustness and execution success rates.
+If SQL execution fails:
 
----
+1. The database error message is captured
+2. The error message is returned to the agent
+3. A refined SQL query is regenerated
 
-## 4. Evaluation Procedure
-
-System performance was evaluated using structured business queries categorized by complexity:
-
-- Aggregation queries (SUM, COUNT, AVG)  
-- Multi-condition filtering  
-- Time-series trend analysis  
-- Comparative analytical queries  
-
-Each query was tested under both:
-- Baseline multi-step LLM pipeline  
-- Optimized unified agent architecture  
-
-### 4.1 Evaluation Metrics
-
-Performance was assessed across four dimensions:
-
-**1. SQL Execution Accuracy**  
-- Syntactic correctness  
-- Semantic correctness  
-
-**2. End-to-End Latency**  
-Measured from user input submission to final visualization and explanation output.
-
-**3. Visualization Appropriateness**  
-Evaluates alignment between dataset structure and selected chart type.
-
-**4. API Cost Efficiency**  
-- Number of model invocations  
-- Token consumption per query  
-
-The optimized architecture demonstrated:
-
-- Higher SQL accuracy  
-- Reduced latency  
-- Lower token usage  
-- Stable performance within rate limits  
+This iterative correction mechanism increases robustness and improves query success rates.
 
 ---
 
-This framework demonstrates that a structured Agentic AI architecture can transform traditional Business Intelligence workflows into an intelligent, self-service analytics platform.
+## 5. Evaluation Procedure
+
+System performance was evaluated using structured business queries categorized by analytical complexity:
+
+- Aggregation queries (SUM, COUNT, AVG)
+- Multi-condition filtering
+- Time-series trend analysis
+- Comparative analytical queries
+
+### Evaluation Metrics
+
+Performance was assessed across four key dimensions:
+
+**1. SQL Execution Accuracy**
+
+- Syntactic correctness
+- Semantic correctness
+
+**2. End-to-End Latency**
+
+Measured from user query submission to final visualization and explanation output.
+
+**3. Visualization Appropriateness**
+
+Evaluates whether the selected chart type aligns with the dataset structure.
+
+**4. API Cost Efficiency**
+
+- Number of model invocations
+- Token consumption per query
+
+The optimized unified agent architecture demonstrated improved SQL accuracy, reduced response latency, lower token usage, and stable performance under system constraints.
+
+---
+
+This framework demonstrates how an **Agentic AI architecture** can transform traditional Business Intelligence workflows into an intelligent, self-service analytics platform.
