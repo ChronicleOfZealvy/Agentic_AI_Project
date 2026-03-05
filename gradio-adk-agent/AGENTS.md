@@ -17,7 +17,7 @@ gradio-adk-agent/
 │   ├── bi_service.py      # Business Intelligence service
 │   ├── db_config.py       # Database configuration
 │   ├── sql_executor.py    # SQL execution utilities
-│   └── .env               # API keys and credentials
+│   └── .env.example       # API keys and credentials
 ├── app.py                 # Gradio web interface
 ├── pyproject.toml         # Project dependencies
 └── README.md              # Project documentation
