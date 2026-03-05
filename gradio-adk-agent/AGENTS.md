@@ -21,21 +21,31 @@ The BI agent interacts with the database using two controlled tools:
 
 ## Project Structure
 
-The project follows the ADK web directory structure:
+The repository structure is organized as follows:
 
 ```
-gradio-adk-agent/
-├── bi_agent/              # Agent package
-│   ├── __init__.py        # Package initialization
-│   ├── agent.py           # Main agent definitions
-│   ├── tools.py           # Custom tool definitions
-│   ├── bi_service.py      # Business Intelligence service
-│   ├── db_config.py       # Database configuration
-│   ├── sql_executor.py    # SQL execution utilities
-│   └── .env.example       # API keys and credentials
-├── app.py                 # Gradio web interface
-├── pyproject.toml         # Project dependencies
-└── README.md              # Project documentation
+.
+├── assets/                        # Architecture diagrams
+│   ├── Workflow.png
+│   └── root_agent.png
+│
+├── gradio-adk-agent/              # Main ADK project
+│   ├── bi_agent/                  # Agent package
+│   │   ├── __init__.py
+│   │   ├── agent.py               # Agent definitions
+│   │   ├── tools.py               # Custom tools
+│   │   ├── bi_service.py          # Business Intelligence service
+│   │   ├── db_config.py           # Database configuration
+│   │   ├── sql_executor.py        # SQL execution utilities
+│   │   └── .env.example           # Environment variable template
+│   │
+│   ├── app.py                     # Gradio web interface
+│   ├── AGENTS.md                  # Prompt templates
+│   ├── pyproject.toml             # Project dependencies
+│   └── uv.lock                    # Reproducible environment
+│
+├── README.md
+└── Short Technical Report.md
 ```
 
 ## Running the Project
