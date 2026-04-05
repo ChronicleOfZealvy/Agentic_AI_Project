@@ -159,52 +159,26 @@ Open in browser: `http://127.0.0.1:7860`
 
 ## 📊 Workflow / Pipeline
 
-```
-┌──────────────────────────────────────────────────────────┐
-│                      USER QUESTION                       │
-│       "What were the top 5 sales regions in Q3?"         │
-└──────────────────────────┬───────────────────────────────┘
-                           │
-                           ▼
-             ┌─────────────────────────┐
-             │       Root Agent        │
-             │      (Orchestrator)     │
-             │  Routes & coordinates   │
-             │     between agents      │
-             └────────────┬────────────┘
-                          │
-                          ▼
-             ┌─────────────────────────┐
-             │    BI Unified Agent     │
-             │   (Text-to-SQL Core)    │
-             │                         │
-             │  1. Analyze intent      │
-             │  2. Retrieve schema     │
-             │  3. Generate SQL        │
-             │  4. Validate & execute  │
-             └────────────┬────────────┘
-                          │
-                ┌─────────┴──────────┐
-                │   SQL Execution    │
-                │   Tool (Guarded)   │
-                │  SELECT-only mode  │
-                └─────────┬──────────┘
-                          │
-                          ▼
-             ┌─────────────────────────┐
-             │      Insight Agent      │
-             │                         │
-             │  1. Select chart type   │
-             │  2. Generate visual     │
-             │  3. Write explanation   │
-             └────────────┬────────────┘
-                          │
-                          ▼
-         ┌───────────────────────────────────┐
-         │          User Interface           │
-         │  ADK Web (port 8000)              │
-         │  Gradio App (port 7860)           │
-         └───────────────────────────────────┘
+```mermaid
+flowchart TD
+    A["USER QUESTION<br/>What were the top 5 sales regions in Q3?"]
+    
+    A --> B["Root Agent<br/>(Orchestrator)<br/>Routes & coordinates between agents"]
+    
+    B --> C["BI Unified Agent<br/>(Text-to-SQL Core)<br/><br/>
+    1. Analyze intent<br/>
+    2. Retrieve schema<br/>
+    3. Generate SQL<br/>
+    4. Validate & execute"]
+    
+    C --> D["SQL Execution Tool<br/>(Guarded)<br/>SELECT-only mode"]
+    
+    D --> E["Insight Agent<br/><br/>
+    1. Select chart type<br/>
+    2. Generate visual<br/>
+    3. Write explanation"]
+    
+    E --> F["User Interface<br/>ADK Web (port 8000)<br/>Gradio App (port 7860)"]
 ```
 
 **Pipeline Summary:**
